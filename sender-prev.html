@@ -9,40 +9,41 @@
 <body>
 
   <div class="container">
+
     <div class="Link-pagamento">
       <iframe id="pagamentoIframe" src="" frameborder="0"></iframe>
     </div>
 
     <form class="form-container">
       <div class="input-wrapper">
-  <label>Nota fiscal</label>
-  <input type="file" name="nota-fiscal" />
-  <button type="button" class="limpar" onclick="limparInput(this)">×</button>
-</div>
+        <label>Nota fiscal</label>
+        <input type="file" name="nota-fiscal" />
+        <button type="button" class="limpar" onclick="limparInput(this)">×</button>
+      </div>
 
-<div class="input-wrapper">
-  <label>Conversa WhatsApp</label>
-  <input type="file" name="conversa[]" multiple />
-  <button type="button" class="limpar" onclick="limparInput(this)">×</button>
-</div>
+      <div class="input-wrapper">
+        <label>Conversa WhatsApp</label>
+        <input type="file" name="conversa[]" multiple />
+        <button type="button" class="limpar" onclick="limparInput(this)">×</button>
+      </div>
 
-<div class="input-wrapper">
-  <label>Comprovante de Entrega</label>
-  <input type="file" name="comprovante" />
-  <button type="button" class="limpar" onclick="limparInput(this)">×</button>
-</div>
+      <div class="input-wrapper">
+        <label>Comprovante de Entrega</label>
+        <input type="file" name="comprovante" />
+        <button type="button" class="limpar" onclick="limparInput(this)">×</button>
+      </div>
 
-<div class="input-wrapper">
-  <label>Vídeos</label>
-  <input type="file" name="videos[]" multiple />
-  <button type="button" class="limpar" onclick="limparInput(this)">×</button>
-</div>
+      <div class="input-wrapper">
+        <label>Vídeos</label>
+        <input type="file" name="videos[]" multiple />
+        <button type="button" class="limpar" onclick="limparInput(this)">×</button>
+      </div>
 
-<div class="input-wrapper">
-  <label>Áudios</label>
-  <input type="file" name="audios[]" multiple />
-  <button type="button" class="limpar" onclick="limparInput(this)">×</button>
-</div>
+      <div class="input-wrapper">
+        <label>Áudios</label>
+        <input type="file" name="audios[]" multiple />
+        <button type="button" class="limpar" onclick="limparInput(this)">×</button>
+      </div>
 
       <nav>
         <button type="reset">Limpar</button>
@@ -56,31 +57,25 @@
   </footer>
 
   <script>
-  function limparInput(botao) {
-    const input = botao.parentElement.querySelector('input');
-    if (input) {
-      input.value = '';
+    function limparInput(botao) {
+      const input = botao.parentElement.querySelector('input');
+      if (input) {
+        input.value = '';
+      }
     }
-  }
 
-  function limparInput(botao) {
-    const input = botao.parentElement.querySelector('input');
-    if (input) input.value = '';
-  }
+    // Função para ler parâmetros da URL
+    function getQueryParam(param) {
+      const urlParams = new URLSearchParams(window.location.search);
+      return urlParams.get(param) || '';
+    }
 
-  // Função para ler parâmetros da URL
-  function getQueryParam(param) {
-  const urlParams = new URLSearchParams(window.location.search);
-  return urlParams.get(param) || '';
-}
-
-document.getElementById('cnpjValor').textContent = getQueryParam('cnpj');
-document.getElementById('pedidoValor').textContent = getQueryParam('pedido');
-document.getElementById('pagamentoIframe').src = decodeURIComponent(getQueryParam('iframe'));
-  
-</script>
-
+    // Só seta o iframe com o link decodificado da URL
+    const iframeLink = decodeURIComponent(getQueryParam('iframe'));
+    if (iframeLink) {
+      document.getElementById('pagamentoIframe').src = iframeLink;
+    }
+  </script>
 
 </body>
 </html>
-
